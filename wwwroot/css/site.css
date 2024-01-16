@@ -1,0 +1,30 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.hero-section {
+    position: relative;
+    height: 1500px; /* Adjust as needed */
+    overflow: hidden;
+}
+
+    .hero-section img {
+        width: 100%;
+        height: auto;
+        object-fit: cover; /* Ensures the image covers the entire container */
+    }

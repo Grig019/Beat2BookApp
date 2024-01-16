@@ -1,0 +1,65 @@
+﻿@using Beat2Book.HomeViewModels
+@using Beat2Book.Models
+
+@using Beat2Book.Data.Enum;
+
+@using Beat2Book.ViewModels;
+
+@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="jumbotron text-center hero-section">
+    <div class="container">
+        <h1 class="jumbotron-heading">Beat2Book</h1>
+        <p class="lead text-muted">
+            Discover, connect, and book your favorite bands effortlessly with BeatBook – the ultimate platform for music enthusiasts, event organizers, and talented musicians
+        </p>
+        <p>
+            <a asp-page="/Account/Register" class="btn btn-primary my-2">Main call to action</a>
+
+            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        </p>
+    </div> 
+    <img src="~/images/hero.png" alt="Hero Image">
+</section>
+
+<section>
+    <div class="container">
+        <h3>Running clubs near @Model.City, @Model.State</h3>
+        @if (Model.Clubs == null || !Model.Clubs.Any())
+        {
+            <h1 class="fw-light">
+                There are no running clubs in your area! <a asp-area="" asp-controller="Account"
+                                                            asp-action="Login">Login</a> and create one!
+            </h1>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var item in Model.Clubs)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="@item.Image" width="100%" height="225" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">@item.Title</h4>
+                                <p class="card-text text-body">@item.Description</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("Detail", "Club", new { id = item.Id })"
+                                           class="btn btn-sm btn-outline-secondary">View</a>
+                                    </div>
+                                    <small class="text-muted">Category: @item.BandCategory</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+
